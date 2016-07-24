@@ -6,6 +6,7 @@ package com.example.testaidl1;
 import java.util.HashMap;
 
 import com.yc.conn.ConnExternal;
+import com.yc.external.BaseGetInfo;
 import com.yc.external.Cmd;
 import com.yc.external.IGetFromClient;
 import com.yc.external.JsonHelper;
@@ -15,10 +16,10 @@ import com.yc.external.JsonHelper;
  * @time 2016-7-15 下午6:23:04
  * TODO:
  */
-public class MusicInfo implements IGetFromClient {
+public class MusicInfo2 extends BaseGetInfo {
 
 	@Override
-	public String getInfo(int cmd) {
+	public String getClientInfo(int cmd) {
 		switch (cmd) {
 		case Cmd.GET_MUSIC_INFO:
 			HashMap<String, String> map = new HashMap<String, String>();
@@ -31,15 +32,4 @@ public class MusicInfo implements IGetFromClient {
 		}
 		return null;
 	}
-	
-	public MusicInfo() {
-		ConnExternal.getInstance().register(this);
-	}
-	
-	@Override
-	protected void finalize() throws Throwable {
-		ConnExternal.getInstance().unregister(this);
-		super.finalize();
-	}
-
 }

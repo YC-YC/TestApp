@@ -18,7 +18,8 @@ import com.yc.external.IGetFromClient;
 
 /**
  * @author YC
- * @time 2016-7-15 上午11:48:23 TODO:
+ * @time 2016-7-15 上午11:48:23 
+ * TODO:aild连接
  */
 public class ConnExternal {
 
@@ -39,12 +40,18 @@ public class ConnExternal {
 		return instance;
 	}
 
-	public void init(Context context) {
+	public void bindService(Context context) {
 		mContext = context;
 		conn();
 	}
 	
+	public void unbindService(){
+		unConn();
+	}
 	
+	
+	
+
 	public boolean isConn(){
 		return mExternalConn != null;
 	}
@@ -84,6 +91,12 @@ public class ConnExternal {
 		mContext.bindService(intent, conn, 1);
 	}
 
+	private void unConn() {
+		if (conn != null){
+			mContext.unbindService(conn);		
+		}
+	}
+	
 	private ServiceConnection conn = new ServiceConnection() {
 
 		@Override

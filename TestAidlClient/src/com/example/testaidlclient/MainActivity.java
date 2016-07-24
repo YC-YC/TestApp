@@ -13,8 +13,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		ConnExternal.getInstance().init(this);
-		new RadioInfo();
+		ConnExternal.getInstance().bindService(this);
+		new RadioInfo2();
 	}
 
 	
@@ -30,6 +30,12 @@ public class MainActivity extends Activity {
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		ConnExternal.getInstance().unbindService();
+		super.onDestroy();
 	}
 	
 }
